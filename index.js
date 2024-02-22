@@ -32,6 +32,7 @@ async function run() {
 
     const brandCollection = client.db('brandDB').collection('products');
     const subCollection = client.db('brandDB').collection('subs')
+    const cartCollection = client.db('brandDB').collection('carts')
     const userCollection = client.db("brandDB").collection('user')
 
 
@@ -162,6 +163,13 @@ async function run() {
     })
 
 
+// cart Collection
+app.post('/carts', async (req, res) => {
+  const item = req.body;
+  console.log(item);
+  const result = await cartCollection.insertOne(item);
+  res.send(result);
+})
 
 
 
