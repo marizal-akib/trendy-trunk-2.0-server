@@ -31,6 +31,7 @@ async function run() {
     // await client.connect();
 
     const brandCollection = client.db('brandDB').collection('products');
+    const subCollection = client.db('brandDB').collection('subs')
     const userCollection = client.db("brandDB").collection('user')
 
 
@@ -78,7 +79,12 @@ async function run() {
       const result = await brandCollection.insertOne(newProduct);
       res.send(result);
     })
+    // newsletter api
+    app.get('/subs', async (req, res) => {
 
+      const result = await subCollection.find().toArray();
+      res.send(result);
+    })
     // user api
     app.get('/user', async (req, res) => {
       const cursor = userCollection.find();
